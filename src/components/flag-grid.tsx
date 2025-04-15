@@ -21,10 +21,6 @@ export default function FlagGrid() {
 
     const url = qs.stringifyUrl({ url: '/api/v1/countries' });
 
-    // function setPageNumber(pageNumber: number) {
-    //     setParams({ pageNumber })
-    // }
-
     useEffect(() => {
         getAll(url).then(data => {
             setData(data);
@@ -42,7 +38,7 @@ export default function FlagGrid() {
                 <>
                     <div className='grid grid-cols-4 gap-6'>
                         {data.countries.map(country => (
-                            <FlagCard key={country.name} auction={country.name} />
+                            <FlagCard key={country.name} country={country} />
                         ))}
                     </div>
 

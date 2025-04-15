@@ -1,51 +1,32 @@
-
+import {Country, CountryInfo} from "@/types";
+import { promises as fs } from 'fs';
 
 const baseUrl = process.env.API_URL;
 
-async function get(url: string) {
+async function get(url: string): Promise<Country[]> {
     const requestOptions = {
         method: 'GET',
         headers: await getHeaders()
     }
- const response = await fetch(baseUrl + url, requestOptions);
-    //const response = await fetch("https://example.org/products.json");
-   return handleResponse(response);
+    const file = await fs.readFile(process.cwd() + '/src/data-access/countries.json', 'utf8');
+    const data = JSON.parse(file);
+    return data;
+    // const response = await fetch('/data-access/countries.json');
+    // //const response = await fetch(baseUrl + url, requestOptions);
+    //
+    // return handleResponse(response);
 }
 
-async function post(url: string, body: {}) {
+async function getByName(url: string): Promise<CountryInfo> {
     const requestOptions = {
-        method: 'POST',
-        headers: await getHeaders(),
-        body: JSON.stringify(body)
-    }
-
-    const response = await fetch(baseUrl + url, requestOptions);
-
-    return handleResponse(response);
-}
-
-async function put(url: string, body: {}) {
-    const requestOptions = {
-        method: 'PUT',
-        headers: await getHeaders(),
-        body: JSON.stringify(body)
-    }
-
-    const response = await fetch(baseUrl + url, requestOptions);
-
-    return handleResponse(response);
-}
-
-async function del(url: string) {
-    const requestOptions = {
-        method: 'DELETE',
+        method: 'GET',
         headers: await getHeaders()
     }
 
     const response = await fetch(baseUrl + url, requestOptions);
-
     return handleResponse(response);
 }
+
 
 async function getHeaders() {
     const headers = {
@@ -71,7 +52,7 @@ async function handleResponse(response: Response) {
     } else {
         const error = {
             status: response.status,
-            message: typeof(data === 'string') ? data : response.statusText
+            message: typeof (data === 'string') ? data : response.statusText
         }
         return {error}
     }
@@ -79,7 +60,5 @@ async function handleResponse(response: Response) {
 
 export const httpWrapper = {
     get,
-    post,
-    put,
-    del
+    getByName
 }

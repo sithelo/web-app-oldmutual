@@ -7,10 +7,9 @@ async function get(url: string) {
         method: 'GET',
         headers: await getHeaders()
     }
-
-    const response = await fetch(baseUrl + url, requestOptions);
-
-    return handleResponse(response);
+ const response = await fetch(baseUrl + url, requestOptions);
+    //const response = await fetch("https://example.org/products.json");
+   return handleResponse(response);
 }
 
 async function post(url: string, body: {}) {
@@ -61,6 +60,7 @@ async function handleResponse(response: Response) {
     let data;
     try {
         data = JSON.parse(text);
+        console.log(data);
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
         data = text;

@@ -13,8 +13,9 @@ export default function FlagImage({imageUrl}: Props) {
     return (
         <Image
             src={imageUrl}
-            fill
-            alt='image of car'
+            width={60}
+            height={60}
+            alt='image of flag'
             priority
             className={`
                     object-cover group-hover:opacity-75 duration-700 ease-in-out

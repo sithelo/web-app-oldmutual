@@ -1,27 +1,23 @@
 import React from 'react'
 import FlagImage from './flag-image';
-import { Flag } from '@/types';
+import { Country } from '@/types';
 import Link from 'next/link';
 
 type Props = {
-    auction: Flag;
+    country: Country;
 }
 
-export default function FlagCard({ auction }: Props) {
+export default function FlagCard({ country }: Props) {
+    const flagcdn = `https://flagcdn.com/${country.flag}.svg`.toLowerCase();
     return (
-        <Link href={`/auctions/details/${auction.id}`} className='group'>
+        <Link href={`/countries/details/${country.name}`} className='group'>
             <div className='relative w-full bg-gray-200 aspect-[16/10] rounded-lg overflow-hidden'>
-                <FlagImage imageUrl={auction.imageUrl} />
-                <div className='absolute bottom-2 left-2'>
+                <FlagImage imageUrl={flagcdn} />
 
-                </div>
-                <div className='absolute top-2 right-2'>
-
-                </div>
             </div>
             <div className='flex justify-between items-center mt-4'>
-                <h3 className='text-gray-700'>{auction.make} {auction.model}</h3>
-                <p className='font-semibold text-sm'>{auction.year}</p>
+                {/*<h3 className='text-gray-700'>{country.name}</h3>*/}
+                <p className='font-semibold text-sm'>{country.name}</p>
             </div>
 
         </Link>

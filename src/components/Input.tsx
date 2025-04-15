@@ -9,7 +9,7 @@ type Props = {
 
 export default function Input(props: Props) {
     const {fieldState, field} = useController({...props, defaultValue: ''})
-    // @ts-ignore
+    // @ts-expect-error
     return (
         <div className='mb-3'>
             {props.showLabel && (

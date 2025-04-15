@@ -12,6 +12,7 @@ async function get(url: string): Promise<Country[]> {
     const data = JSON.parse(file);
     return data;
     // const response = await fetch('/data-access/countries.json');
+    //
     // //const response = await fetch(baseUrl + url, requestOptions);
     //
     // return handleResponse(response);
